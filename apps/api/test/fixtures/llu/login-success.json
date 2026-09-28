@@ -1,0 +1,7 @@
+{
+  "status": 0,
+  "data": {
+    "user": { "id": "7d2f3c1e-1111-4a2b-9c3d-000000000001", "country": "TR" },
+    "authTicket": { "token": "tok-abc", "expires": 1999999999, "duration": 15552000000 }
+  }
+}

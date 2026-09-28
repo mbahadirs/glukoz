@@ -1,0 +1,275 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  CAREGIVER
+  VIEWER
+}
+
+enum ReadingSource {
+  current
+  graph
+  logbook
+  import
+}
+
+enum AccountStatus {
+  active
+  paused
+  error
+}
+
+enum NoteType {
+  meal
+  insulin_rapid
+  insulin_basal
+  exercise
+  medication
+  illness
+  sleep
+  water
+  other
+}
+
+model User {
+  id           String             @id @default(uuid())
+  email        String             @unique
+  passwordHash String
+  displayName  String
+  role         Role               @default(VIEWER)
+  locale       String             @default("tr")
+  unit         String             @default("mgdl") // "mgdl" | "mmol"
+  theme        String             @default("system") // "system" | "light" | "dark"
+  createdAt    DateTime           @default(now())
+  sessions     Session[]
+  access       PatientAccess[]
+  pushSubs     PushSubscription[]
+  consents     Consent[]
+
+  @@map("users")
+}
+
+model Session {
+  /// sha256(çerezdeki 256 bit rastgele kimlik) — ham kimlik DB'de tutulmaz
+  id        String   @id
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  userAgent String?
+  ip        String?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@map("sessions")
+}
+
+model LluAccount {
+  id             String        @id @default(uuid())
+  label          String
+  emailEnc       String
+  passwordEnc    String
+  region         String?
+  lluUserId      String?
+  tokenEnc       String?
+  tokenExpiresAt DateTime?
+  status         AccountStatus @default(active)
+  lastError      String?
+  failCount      Int           @default(0)
+  createdAt      DateTime      @default(now())
+  patients       Patient[]
+
+  @@map("llu_accounts")
+}
+
+model Patient {
+  id             String          @id @default(uuid())
+  lluPatientId   String
+  accountId      String
+  account        LluAccount      @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  firstName      String
+  lastName       String
+  displayName    String?
+  timezone       String          @default("Europe/Istanbul")
+  targetLow      Int             @default(70)
+  targetHigh     Int             @default(180)
+  lluTargetLow   Int?
+  lluTargetHigh  Int?
+  sensorLifeDays Int             @default(15)
+  readings       Reading[]
+  sensors        Sensor[]
+  notes          Note[]
+  access         PatientAccess[]
+  alertRules     AlertRule[]
+  logbook        LogbookEntry[]
+
+  @@unique([accountId, lluPatientId])
+  @@map("patients")
+}
+
+model PatientAccess {
+  userId    String
+  patientId String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  patient   Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  canEdit   Boolean @default(false)
+
+  @@id([userId, patientId])
+  @@map("patient_access")
+}
+
+model Reading {
+  id            BigInt        @id @default(autoincrement())
+  patientId     String
+  patient       Patient       @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  ts            DateTime      @db.Timestamptz(3)
+  deviceLocalTs String?
+  mgdl          Int
+  trend         Int?
+  source        ReadingSource
+  createdAt     DateTime      @default(now())
+
+  @@unique([patientId, ts])
+  @@index([patientId, ts(sort: Desc)])
+  @@map("readings")
+}
+
+/// LLU logbook kayıtları (manuel tarama ve alarm) — alarmType bilgisini korumak için ayrı tablo.
+model LogbookEntry {
+  id        BigInt   @id @default(autoincrement())
+  patientId String
+  patient   Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  ts        DateTime @db.Timestamptz(3)
+  mgdl      Int
+  kind      String // scan | alarm
+  alarmType Int?
+
+  @@unique([patientId, ts, kind])
+  @@map("logbook_entries")
+}
+
+model Sensor {
+  id          String    @id @default(uuid())
+  patientId   String
+  patient     Patient   @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  serial      String
+  productType Int?
+  activatedAt DateTime  @db.Timestamptz(3)
+  expectedEnd DateTime  @db.Timestamptz(3)
+  endedAt     DateTime? @db.Timestamptz(3)
+
+  @@unique([patientId, serial])
+  @@map("sensors")
+}
+
+model Note {
+  id          String   @id @default(uuid())
+  patientId   String
+  patient     Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  authorId    String
+  ts          DateTime @db.Timestamptz(3)
+  type        NoteType
+  carbsG      Int?
+  insulinU    Decimal? @db.Decimal(5, 2)
+  durationMin Int?
+  /// su tüketimi (ml)
+  waterMl     Int?
+  text        String?
+  createdAt   DateTime @default(now())
+
+  @@index([patientId, ts])
+  @@map("notes")
+}
+
+model AlertRule {
+  id            String  @id @default(uuid())
+  patientId     String
+  patient       Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  kind          String // urgent_low | low | high | rapid_fall | rapid_rise | stale | sensor_ending
+  enabled       Boolean @default(true)
+  thresholdMgdl Int?
+  sustainMin    Int     @default(0)
+  cooldownMin   Int     @default(30)
+  quietStart    String?
+  quietEnd      String?
+
+  @@unique([patientId, kind])
+  @@map("alert_rules")
+}
+
+model AlertEvent {
+  id        String    @id @default(uuid())
+  ruleId    String
+  patientId String
+  firedAt   DateTime  @default(now())
+  mgdl      Int?
+  message   String
+  ackBy     String?
+  ackAt     DateTime?
+
+  @@index([patientId, firedAt])
+  @@index([ruleId, firedAt])
+  @@map("alert_events")
+}
+
+model PushSubscription {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  endpoint  String   @unique
+  p256dh    String
+  auth      String
+  createdAt DateTime @default(now())
+
+  @@map("push_subscriptions")
+}
+
+model CollectorRun {
+  id          BigInt   @id @default(autoincrement())
+  accountId   String
+  startedAt   DateTime
+  durationMs  Int
+  ok          Boolean
+  errorCode   String?
+  newReadings Int      @default(0)
+
+  @@index([accountId, startedAt(sort: Desc)])
+  @@map("collector_runs")
+}
+
+model AuditLog {
+  id        BigInt   @id @default(autoincrement())
+  userId    String?
+  action    String
+  targetId  String?
+  meta      Json?
+  ip        String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+model Consent {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  version    String
+  acceptedAt DateTime @default(now())
+
+  @@map("consents")
+}
+
+model Setting {
+  key   String @id
+  value String
+
+  @@map("settings")
+}

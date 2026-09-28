@@ -1,0 +1,40 @@
+{
+  "status": 0,
+  "data": [
+    {
+      "id": "conn-1",
+      "patientId": "11111111-2222-4333-8444-555555555555",
+      "country": "TR",
+      "status": 2,
+      "firstName": "Test",
+      "lastName": "Hasta",
+      "targetLow": 70,
+      "targetHigh": 180,
+      "uom": 1,
+      "sensor": {
+        "deviceId": "",
+        "sn": "0M0000TEST1",
+        "a": 1790000000,
+        "w": 60,
+        "pt": 4,
+        "s": false,
+        "lj": false
+      },
+      "glucoseMeasurement": {
+        "FactoryTimestamp": "9/27/2026 1:38:50 PM",
+        "Timestamp": "9/27/2026 4:38:50 PM",
+        "type": 1,
+        "ValueInMgPerDl": 91,
+        "TrendArrow": 3,
+        "TrendMessage": null,
+        "MeasurementColor": 1,
+        "GlucoseUnits": 1,
+        "Value": 91,
+        "isHigh": false,
+        "isLow": false
+      },
+      "unknownField": { "nested": true }
+    }
+  ],
+  "ticket": { "token": "tok-refreshed", "expires": 2000000000, "duration": 15552000000 }
+}

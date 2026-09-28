@@ -1,0 +1,30 @@
+{
+  "status": 0,
+  "data": [
+    {
+      "FactoryTimestamp": "9/26/2026 7:40:00 AM",
+      "Timestamp": "9/26/2026 10:40:00 AM",
+      "type": 1,
+      "ValueInMgPerDl": 120,
+      "TrendArrow": 3,
+      "MeasurementColor": 1,
+      "GlucoseUnits": 1,
+      "Value": 120,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "FactoryTimestamp": "9/26/2026 11:15:00 PM",
+      "Timestamp": "9/27/2026 2:15:00 AM",
+      "type": 1,
+      "ValueInMgPerDl": 62,
+      "TrendArrow": 2,
+      "alarmType": 0,
+      "MeasurementColor": 2,
+      "GlucoseUnits": 1,
+      "Value": 62,
+      "isHigh": false,
+      "isLow": true
+    }
+  ]
+}

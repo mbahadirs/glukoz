@@ -1,0 +1,34 @@
+name: Bug report
+description: Something doesn't work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Do not include real health data, e-mail addresses, passwords, tokens or cookies** — redact logs and screenshots.
+        Security vulnerabilities: please report privately (see SECURITY.md), not here.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce (ideally in mock mode, LLU_MOCK=true)
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version / commit
+  - type: input
+    id: env
+    attributes:
+      label: Deployment (Docker Compose, Coolify, Node…) and browser
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs or error codes (e.g. from Settings → System status), redacted
+      render: text

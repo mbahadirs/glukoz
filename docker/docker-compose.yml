@@ -1,0 +1,72 @@
+# Kullanım (proje kökünden):  docker compose -f docker/docker-compose.yml --env-file .env up -d --build
+name: glukoz
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: glukoz
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD gerekli}
+      POSTGRES_DB: glukoz
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U glukoz -d glukoz']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file: ../.env
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgresql://glukoz:${POSTGRES_PASSWORD}@db:5432/glukoz
+    depends_on:
+      db:
+        condition: service_healthy
+    stop_grace_period: 15s # collector açık döngüyü en fazla 10 sn bekler
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+      - '443:443/udp'
+    environment:
+      DOMAIN: ${DOMAIN:?DOMAIN gerekli}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+
+  backup:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      PGHOST: db
+      PGUSER: glukoz
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+      PGDATABASE: glukoz
+      BACKUP_PASSPHRASE: ${BACKUP_PASSPHRASE:?BACKUP_PASSPHRASE gerekli}
+      BACKUP_KEEP_DAYS: 14
+    volumes:
+      - ./backup.sh:/backup.sh:ro
+      - ../backups:/backups
+    entrypoint: ['/bin/sh', '/backup.sh']
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+  caddy_data:
+  caddy_config:

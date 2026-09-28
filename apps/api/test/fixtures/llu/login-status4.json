@@ -1,0 +1,6 @@
+{
+  "status": 4,
+  "data": {
+    "step": { "type": "tou", "componentName": "AcceptDocument", "props": { "reaccept": true } }
+  }
+}

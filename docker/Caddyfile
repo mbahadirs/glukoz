@@ -1,0 +1,14 @@
+{$DOMAIN} {
+	# SSE akışı sıkıştırılmaz/tamponlanmaz
+	@compressible not path /api/stream
+	encode @compressible zstd gzip
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		-Server
+	}
+
+	reverse_proxy app:3000 {
+		flush_interval -1
+	}
+}

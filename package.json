@@ -1,0 +1,39 @@
+{
+  "name": "glukoz-panel",
+  "description": "Self-hosted glucose dashboard for FreeStyle Libre data via LibreLinkUp: live view, CGM consensus reports (AGP, TIR, GMI, GRI) and a PWA.",
+  "license": "AGPL-3.0-or-later",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@9.4.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "pnpm -r --parallel --filter ./apps/* dev",
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "test:e2e": "pnpm --filter @glukoz/web test:e2e",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "typecheck": "pnpm -r typecheck",
+    "seed:mock": "pnpm --filter @glukoz/api seed:mock",
+    "db:migrate": "pnpm --filter @glukoz/api db:migrate"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "eslint": "^9.39.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "globals": "^16.0.0",
+    "prettier": "^3.6.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.46.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mbahadirs/glukoz"
+  },
+  "homepage": "https://github.com/mbahadirs/glukoz#readme",
+  "bugs": {
+    "url": "https://github.com/mbahadirs/glukoz/issues"
+  }
+}

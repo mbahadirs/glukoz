@@ -1,0 +1,592 @@
+{
+  "app": {
+    "name": "Glucose Panel"
+  },
+  "common": {
+    "loading": "Loading…",
+    "save": "Save",
+    "saved": "Saved",
+    "cancel": "Cancel",
+    "close": "Close",
+    "delete": "Delete",
+    "edit": "Edit",
+    "all": "All",
+    "yes": "Yes",
+    "no": "No",
+    "later": "Later"
+  },
+  "disclaimer": {
+    "title": "Important:",
+    "medical": "This panel must not be used for treatment decisions. Data may be delayed or incomplete. Use the official app for alarms."
+  },
+  "footer": {
+    "lastFetch": "Last data fetch: {{time}}",
+    "unaffiliated": "An unofficial, independent open-source project, not affiliated with Abbott.",
+    "source": "Source code (AGPL-3.0)"
+  },
+  "nav": {
+    "main": "Main menu",
+    "skip": "Skip to content",
+    "more": "More",
+    "live": "Live",
+    "daily": "Daily",
+    "reports": "Reports",
+    "records": "Records",
+    "sensors": "Sensors",
+    "alerts": "Alerts",
+    "settings": "Settings"
+  },
+  "auth": {
+    "loginTitle": "Sign in",
+    "setupTitle": "Initial setup",
+    "setupIntro": "There are no users yet. Create the first administrator (ADMIN) account. This page closes after setup.",
+    "email": "Email",
+    "password": "Password",
+    "passwordHint": "At least 10 characters.",
+    "displayName": "Display name",
+    "login": "Sign in",
+    "logout": "Sign out",
+    "createAdmin": "Create administrator"
+  },
+  "consent": {
+    "title": "Privacy notice and explicit consent",
+    "p1": "This panel processes glucose readings of monitored people (health data — special category personal data under KVKK/GDPR).",
+    "p2": "Data is shown only to authorised users of this panel, stored encrypted and deleted after the retention period. You can ask the administrator to export or delete the data.",
+    "p3": "The detailed privacy notice is provided by the administrator. By continuing you confirm you have read it and give explicit consent to processing for this purpose.",
+    "version": "Notice version: {{version}}",
+    "accept": "I have read the privacy notice and consent to health data being processed in this panel.",
+    "continue": "Accept and continue"
+  },
+  "errors": {
+    "UNKNOWN": "An unexpected error occurred.",
+    "UNAUTHORIZED": "Your session has expired or the credentials are wrong.",
+    "FORBIDDEN": "You are not allowed to do this.",
+    "CONSENT_REQUIRED": "Consent is required to continue.",
+    "CSRF": "Security check failed.",
+    "NOT_FOUND": "Not found.",
+    "VALIDATION": "The input is invalid.",
+    "CONFLICT": "This conflicts with an existing record.",
+    "RATE_LIMITED": "Too many attempts.",
+    "HTTP_500": "Server error.",
+    "HTTP_502": "Server unreachable.",
+    "LLU_BAD_CREDENTIALS": "LibreLinkUp email or password is wrong.",
+    "LLU_ACTION_REQUIRED": "The LibreLinkUp account has a pending confirmation (terms of use etc.).",
+    "LLU_VERSION_TOO_OLD": "The LibreLinkUp client version is no longer accepted.",
+    "LLU_RATE_LIMITED": "LibreLinkUp temporarily blocked requests (too many).",
+    "LLU_NETWORK": "Could not reach the LibreLinkUp server.",
+    "LLU_UNAUTHORIZED": "LibreLinkUp session is invalid.",
+    "LLU_NO_CONNECTIONS": "This account follows nobody.",
+    "LLU_BAD_RESPONSE": "LibreLinkUp returned an unexpected response.",
+    "hint": {
+      "default": "Try again; if the problem persists contact your administrator.",
+      "UNAUTHORIZED": "Check your email and password and sign in again.",
+      "FORBIDDEN": "Ask your administrator for access.",
+      "CSRF": "Reload the page and try again.",
+      "VALIDATION": "Check and correct the fields.",
+      "RATE_LIMITED": "Wait a minute and try again.",
+      "LLU_BAD_CREDENTIALS": "Verify the credentials in the LibreLinkUp mobile app.",
+      "LLU_ACTION_REQUIRED": "Open the LibreLinkUp mobile app and accept the pending terms.",
+      "LLU_VERSION_TOO_OLD": "The system retries automatically; otherwise raise LLU_VERSION.",
+      "LLU_RATE_LIMITED": "Wait a while; the system backs off automatically.",
+      "LLU_NO_CONNECTIONS": "Use a separate follower (LibreLinkUp) account instead of the patient's own and accept the invitation.",
+      "CONSENT_REQUIRED": "Accept the privacy notice."
+    }
+  },
+  "patient": {
+    "select": "Patient",
+    "none": "You have no accessible patients. Ask your administrator for access or add a LibreLinkUp account."
+  },
+  "ranges": {
+    "veryLow": "Very low",
+    "low": "Low",
+    "inRange": "In range",
+    "high": "High",
+    "veryHigh": "Very high",
+    "veryLowRange": "< 54 mg/dL",
+    "lowRange": "54–69 mg/dL",
+    "inRangeRange": "70–180 mg/dL",
+    "highRange": "181–250 mg/dL",
+    "veryHighRange": "> 250 mg/dL",
+    "inRangeShort": "Time in range (TIR)",
+    "tightRange": "Time in tight range (TITR)",
+    "tightRangeRange": "70–140 mg/dL",
+    "inTarget": "Personal target ({{low}}–{{high}})"
+  },
+  "trend": {
+    "NOT_COMPUTABLE": "Not computable",
+    "SINGLE_DOWN": "Falling fast",
+    "FORTY_FIVE_DOWN": "Falling",
+    "FLAT": "Stable",
+    "FORTY_FIVE_UP": "Rising",
+    "SINGLE_UP": "Rising fast",
+    "interval": "Data frequency: about every {{value}} min (LibreLinkUp's update rate; the panel checks every minute).",
+    "intervalUnknown": "Data frequency not available yet.",
+    "showProjection": "Show projection",
+    "projectionTitle": "Mathematical projection (linear)",
+    "projectionAt": "In {{minutes}} min ≈ {{value}} {{unit}} (likely range {{lo}}–{{hi}})",
+    "projectionBasis": "Slope of {{count}} readings over the last {{minutes}} min: {{rate}} {{unit}}/min",
+    "projectionUnavailable": "Not enough recent data for a projection (needs at least 3 readings in the last 20 minutes and a value newer than 10 minutes).",
+    "selectionTitle": "Trend between two points",
+    "selectHint": "Tap two readings on the chart to see the change and trend between them.",
+    "selectSecond": "Select a second point.",
+    "clear": "Clear selection",
+    "segment": "Change: {{delta}} {{unit}} / {{minutes}} min → average {{rate}} {{unit}}/min",
+    "extension": "If this trend continues, in {{minutes}} min ≈ {{value}} {{unit}}",
+    "disclaimer": "Projection and trend are only a mathematical (linear) extension of past values; they ignore meals, insulin, exercise and sensor lag. Do not use for treatment decisions.",
+    "projectionSeries": "Projection",
+    "selectionSeries": "Selected points",
+    "extensionSeries": "Trend extension"
+  },
+  "units": {
+    "minutes_one": "{{count}} min",
+    "minutes_other": "{{count}} min",
+    "hours_one": "{{count}} h",
+    "hours_other": "{{count}} h",
+    "hoursMinutes": "{{h}} h {{m}} min",
+    "perDay": "{{value}}/day"
+  },
+  "live": {
+    "noReading": "No readings yet.",
+    "delta": "{{value}} {{unit}} / 5 min",
+    "updated": "Updated {{ago}}",
+    "stale": "Data delayed — the last reading is older than 15 minutes. Check the patient's phone and the LibreLink app.",
+    "polling": "No live connection; refreshing every minute.",
+    "chart": "Glucose chart",
+    "range": "Time range",
+    "hours_one": "{{count}} h",
+    "hours_other": "{{count}} h",
+    "today": "Today",
+    "hypoCount": "Hypos",
+    "min": "Lowest",
+    "max": "Highest"
+  },
+  "sensor": {
+    "title": "Sensor",
+    "serial": "Serial",
+    "started": "Started",
+    "expectedEnd": "Expected end",
+    "ended": "Ended",
+    "remaining": "{{days}} days {{hours}} hours left",
+    "remainingHours": "{{hours}} hours {{minutes}} minutes left",
+    "remainingLabel": "Sensor time remaining",
+    "expired": "Sensor expired",
+    "none": "No sensors recorded.",
+    "usedDays": "Used (days)",
+    "status": "Status",
+    "active": "Active",
+    "endedEarly": "Ended early",
+    "completed": "Completed"
+  },
+  "charts": {
+    "glucose": "Glucose",
+    "notes": "Notes",
+    "noData": "No data",
+    "lineSummary": "{{count}} readings; lowest {{min}}, highest {{max}} {{unit}}.",
+    "agpSummary": "Median lowest around {{lowTime}} ({{low}} {{unit}}), highest around {{highTime}} ({{high}} {{unit}})."
+  },
+  "noteTypes": {
+    "meal": "Meal",
+    "insulin_rapid": "Rapid insulin",
+    "insulin_basal": "Basal insulin",
+    "exercise": "Exercise",
+    "medication": "Medication",
+    "illness": "Illness",
+    "sleep": "Sleep",
+    "other": "Other",
+    "water": "Water"
+  },
+  "notes": {
+    "add": "Add note",
+    "edit": "Edit note",
+    "type": "Type",
+    "time": "Time",
+    "carbs": "Carbs (g)",
+    "insulin": "Insulin (units)",
+    "duration": "Duration (min)",
+    "text": "Description",
+    "empty": "No notes for this day.",
+    "confirmDelete": "Delete this note?"
+  },
+  "daily": {
+    "prev": "Previous day",
+    "next": "Next day",
+    "date": "Date",
+    "compareWith": "Compare with another day",
+    "compareLegend": "Dashed line: {{date}}",
+    "chart": "Day chart",
+    "summary": "Daily summary",
+    "events": "Events",
+    "notes": "Notes",
+    "gmiIndicative": "Indicative only for a single day"
+  },
+  "events": {
+    "kinds": {
+      "hypo_l1": "Hypo (level 1, <70)",
+      "hypo_l2": "Hypo (level 2, <54)",
+      "hyper": "Hyper (>250)"
+    },
+    "total": "Total events",
+    "nocturnalCount_one": "{{count}} nocturnal",
+    "nocturnalCount_other": "{{count}} nocturnal",
+    "prolongedCount_one": "{{count}} prolonged",
+    "prolongedCount_other": "{{count}} prolonged",
+    "avgHypo": "Avg hypo duration",
+    "avgHyper": "Avg hyper duration",
+    "filter": "Event type",
+    "nightOnly": "Night only (00–06)",
+    "none": "No events in this period.",
+    "type": "Type",
+    "start": "Start",
+    "duration": "Duration",
+    "extreme": "Extreme value",
+    "night": "Night",
+    "prolonged": "prolonged",
+    "ongoing": "ongoing"
+  },
+  "reports": {
+    "period": "Period",
+    "days_one": "{{count}} day",
+    "days_other": "{{count}} days",
+    "customFrom": "From",
+    "customTo": "To",
+    "apply": "Custom range",
+    "exportCsv": "Download CSV",
+    "exportPdf": "Download PDF",
+    "insufficient": "Insufficient data in this period ({{value}}%); metrics may be misleading.",
+    "mean": "Mean glucose",
+    "gmi": "GMI (estimated A1c)",
+    "gmiMmol": "{{value}} mmol/mol",
+    "cv": "Variability (CV)",
+    "cvGoal": "Goal ≤ 36%",
+    "sufficiency": "Data sufficiency",
+    "sufficiencyShort": "Data",
+    "sensorDays": "Sensor days",
+    "goalMet": "Goal met",
+    "goalMissed": "Goal not met",
+    "goalLt": "< {{v}}",
+    "goalGt": "> {{v}}",
+    "goalBelowTotal": "total below < {{v}}",
+    "goalAboveTotal": "total above < {{v}}",
+    "periodsOfDay": "Periods of day",
+    "weekdays": "Days of week",
+    "hypoCount_one": "{{count}} hypo",
+    "hypoCount_other": "{{count}} hypos",
+    "lbgi": "LBGI (low risk index)",
+    "hbgi": "HBGI (high risk index)",
+    "lbgiHint": "< 1.1 low risk",
+    "hbgiHint": "< 4.5 low risk",
+    "sd": "Standard deviation (SD)",
+    "median": "Median",
+    "iqr": "Interquartile range (IQR)",
+    "sections": {
+      "summary": "1. Summary",
+      "tir": "2. Time in ranges",
+      "agp": "3. Ambulatory glucose profile (AGP)",
+      "daily": "4. Daily profiles",
+      "events": "5. Events",
+      "periods": "6. Periods of day and days of week",
+      "heatmap": "7. Hour × day heatmap",
+      "meals": "8. Post-meal analysis",
+      "advanced": "9. Advanced metrics"
+    },
+    "agp": {
+      "title": "AGP chart",
+      "median": "Median",
+      "legend": "Thick line: median (50%). Dark band: 25–75%. Light band: 5–95%. Green band: target range."
+    },
+    "heatmap": {
+      "title": "Hour × day heatmap",
+      "mode": "Cell value",
+      "mean": "Mean",
+      "outOfRange": "Time out of range",
+      "summary": "{{days}} days × 24 hours heatmap."
+    },
+    "gri": {
+      "title": "Glycemia Risk Index (GRI)",
+      "hypo": "Hypo component",
+      "hyper": "Hyper component",
+      "zone": "Zone {{zone}}",
+      "zones": "Dashed lines mark zones: A (0–20), B (20–40), C (40–60), D (60–80), E (80–100). Lower is better.",
+      "summary": "GRI {{gri}}, zone {{zone}}."
+    }
+  },
+  "compare": {
+    "better": "improved",
+    "worse": "worse",
+    "same": "unchanged",
+    "neutral": "change",
+    "points": "pts",
+    "note": "Compared with the previous period of equal length. ▲ improved, ▼ worse."
+  },
+  "periods": {
+    "night": "Night (00–06)",
+    "morning": "Morning (06–12)",
+    "afternoon": "Afternoon (12–18)",
+    "evening": "Evening (18–24)"
+  },
+  "weekdays": {
+    "monday": "Mon",
+    "tuesday": "Tue",
+    "wednesday": "Wed",
+    "thursday": "Thu",
+    "friday": "Fri",
+    "saturday": "Sat",
+    "sunday": "Sun"
+  },
+  "meals": {
+    "intro": "Average response by meal notes ({{unit}}). Meal type is inferred from time of day.",
+    "kind": "Meal",
+    "count": "Count",
+    "pre": "Before",
+    "at1h": "1 h",
+    "at2h": "2 h",
+    "peak": "Peak",
+    "toPeak": "Time to peak",
+    "details_one": "Details of {{count}} meal",
+    "details_other": "Details of {{count}} meals",
+    "kinds": {
+      "breakfast": "Breakfast",
+      "lunch": "Lunch",
+      "dinner": "Dinner",
+      "snack": "Snack"
+    }
+  },
+  "print": {
+    "title": "Glucose report",
+    "period": "Period",
+    "generated": "Generated: {{time}}",
+    "print": "Print / PDF"
+  },
+  "records": {
+    "filter": "Filter",
+    "notes": "Notes",
+    "scan": "Scan",
+    "alarm": "Alarm",
+    "empty": "No records in this period."
+  },
+  "alerts": {
+    "active": "Active alerts",
+    "ack": "Acknowledge",
+    "acked": "Acknowledged {{time}}",
+    "history": "Alert history",
+    "none": "No alerts.",
+    "rules": "Alert rules",
+    "threshold": "Threshold (mg/dL)",
+    "sustain": "Duration (min)",
+    "cooldown": "Cooldown (min)",
+    "quietStart": "Quiet start",
+    "quietEnd": "Quiet end",
+    "urgentIgnoresQuiet": "Urgent low ignores quiet hours."
+  },
+  "alertKinds": {
+    "urgent_low": "Urgent low",
+    "urgent_lowDesc": "Immediately when below threshold (default 54).",
+    "low": "Low",
+    "lowDesc": "When below threshold (default 70) for the given duration.",
+    "high": "High",
+    "highDesc": "When above threshold (default 250) for the given duration.",
+    "rapid_fall": "Rapid fall",
+    "rapid_fallDesc": "When trend is falling quickly and value below threshold (default 120).",
+    "rapid_rise": "Rapid rise",
+    "rapid_riseDesc": "When trend is rising quickly.",
+    "stale": "Data gap",
+    "staleDesc": "When no new data for the given duration (default 20 min).",
+    "sensor_ending": "Sensor ending",
+    "sensor_endingDesc": "When less than 24 h remain, once a day."
+  },
+  "push": {
+    "title": "Notifications",
+    "enable": "Enable notifications",
+    "disable": "Disable notifications",
+    "enabled": "Notifications enabled.",
+    "disabled": "Notifications disabled.",
+    "test": "Send test notification",
+    "testSent_one": "Sent to {{count}} device.",
+    "testSent_other": "Sent to {{count}} devices.",
+    "state": {
+      "unsupported": "This browser does not support Web Push.",
+      "denied": "Notification permission denied. Allow it in browser settings.",
+      "subscribed": "This device receives notifications.",
+      "unsubscribed": "This device does not receive notifications."
+    },
+    "iosNote": "On iPhone/iPad notifications only work when the app is added to the home screen (iOS 16.4+): Safari Share → Add to Home Screen, then open it from the home screen.",
+    "delayNote": "Notifications depend on the cloud and internet connection and may be delayed; they do not replace the official app's alarms."
+  },
+  "pwa": {
+    "updateAvailable": "Update available —",
+    "reload": "Reload"
+  },
+  "offline": {
+    "withTime": "Offline — data as of {{time}}",
+    "noData": "Offline — no cached data"
+  },
+  "settings": {
+    "preferences": "Preferences",
+    "unit": "Unit",
+    "language": "Language",
+    "theme": "Theme",
+    "themes": {
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "patient": "Patient settings — {{name}}",
+    "displayName": "Nickname",
+    "timezone": "Time zone",
+    "targetLow": "Target low (mg/dL)",
+    "targetHigh": "Target high (mg/dL)",
+    "presets": "Target presets",
+    "presetNames": {
+      "general": "General (70–180)",
+      "pregnancy": "Pregnancy (63–140)",
+      "olderHighRisk": "Older / high risk (70–180)"
+    },
+    "lluTargets": "Target in LibreLink: {{low}}–{{high}} mg/dL",
+    "sensorLife": "Sensor life (days)",
+    "sensorLifeHint": "Libre 2 Plus: 15, Libre 2: 14",
+    "install": "Install app",
+    "installButton": "Install to home screen",
+    "iosInstall": "iPhone/iPad: Safari Share → Add to Home Screen.",
+    "installUnavailable": "Your browser doesn't offer an install prompt; use \"Install app\" from the browser menu.",
+    "account": "Account"
+  },
+  "roles": {
+    "ADMIN": "Administrator",
+    "CAREGIVER": "Caregiver",
+    "VIEWER": "Read-only / doctor"
+  },
+  "admin": {
+    "title": "Administration",
+    "users": "Users and access",
+    "addUser": "Add user",
+    "role": "Role",
+    "newPassword": "New password (empty: unchanged)",
+    "access": "Patient access",
+    "canEdit": "Can edit",
+    "confirmDeleteUser": "Delete {{name}}?"
+  },
+  "llu": {
+    "title": "LibreLinkUp accounts",
+    "add": "Add account",
+    "addAndTest": "Add and test connection",
+    "testing": "Testing…",
+    "followerNote": "Use a separate LibreLinkUp follower account, not the patient's own LibreLink account (the patient invites from the app, the follower accepts in LibreLinkUp).",
+    "label": "Label",
+    "email": "LibreLinkUp email",
+    "password": "LibreLinkUp password",
+    "added_one": "Added; found {{count}} patient: {{names}}",
+    "added_other": "Added; found {{count}} patients: {{names}}",
+    "none": "No accounts yet.",
+    "region": "Region",
+    "patients_one": "{{count}} patient",
+    "patients_other": "{{count}} patients",
+    "test": "Test connection",
+    "testOk_one": "Connection OK; {{count}} patient.",
+    "testOk_other": "Connection OK; {{count}} patients.",
+    "resume": "Resume",
+    "confirmDelete": "The account and all patient data will be deleted. Type the label to confirm: {{label}}",
+    "status": {
+      "active": "Active",
+      "paused": "Paused",
+      "error": "Error"
+    }
+  },
+  "system": {
+    "title": "System status",
+    "mock": "mock mode",
+    "minVersion": "Server requires at least {{v}}",
+    "status": "Status",
+    "lastSuccess": "Last successful fetch",
+    "successRate": "24 h success",
+    "lastError": "Last error",
+    "troubleshooting": "Troubleshooting",
+    "symptom": "Symptom / code",
+    "cause": "Likely cause",
+    "fix": "Fix"
+  },
+  "trouble": {
+    "v920": {
+      "symptom": "HTTP 403, status 920, minimumVersion",
+      "cause": "LLU_VERSION outdated",
+      "fix": "Raise the version to minimumVersion (also retried automatically)"
+    },
+    "header": {
+      "symptom": "HTTP 400 RequiredHeaderMissing",
+      "cause": "Account-Id header missing",
+      "fix": "Check the client sends the sha256(user.id) header"
+    },
+    "s2": {
+      "symptom": "status 2",
+      "cause": "Wrong email/password",
+      "fix": "Verify credentials in the LibreLinkUp mobile app"
+    },
+    "s4": {
+      "symptom": "status 4 / step",
+      "cause": "Pending terms/privacy acceptance",
+      "fix": "Open the LibreLinkUp mobile app and accept"
+    },
+    "empty": {
+      "symptom": "Empty connection list",
+      "cause": "Patient's own account used or invitation not accepted",
+      "fix": "Use a separate follower account and accept the invitation"
+    },
+    "r429": {
+      "symptom": "HTTP 429 / lockout",
+      "cause": "Too frequent requests or too many failed logins",
+      "fix": "Wait for backoff; increase polling interval"
+    },
+    "delay": {
+      "symptom": "Data 15+ min late",
+      "cause": "Patient phone offline, LibreLink closed/battery optimisation, Bluetooth drop",
+      "fix": "Check the patient's phone; disable battery optimisation for LibreLink"
+    },
+    "gaps": {
+      "symptom": "Gaps in sensor values",
+      "cause": "Phone–sensor distance, Bluetooth interruption",
+      "fix": "Up to 12 h is backfilled automatically; otherwise import CSV"
+    }
+  },
+  "import": {
+    "title": "LibreView CSV import — {{name}}",
+    "intro": "Upload the glucose CSV downloaded from the LibreView website (max 20 MB). Existing readings are kept.",
+    "file": "CSV file",
+    "upload": "Upload",
+    "result": "{{imported}} readings imported, {{skipped}} skipped ({{rows}} rows)."
+  },
+  "deleteData": {
+    "title": "Data deletion — {{name}}",
+    "intro": "All readings, notes, sensor and alert records of this patient will be permanently deleted. This cannot be undone; export to CSV first.",
+    "start": "Start deletion",
+    "typeName": "Type the patient name to confirm: \"{{name}}\" (within {{sec}} s)",
+    "confirm": "Delete permanently",
+    "done": "Data deleted."
+  },
+  "entry": {
+    "quickTitle": "Quick entry",
+    "quickHint": "Log what happens now with one tap, or pick a past time. Entries appear as markers on the chart.",
+    "categories": {
+      "insulin": "Insulin",
+      "meal": "Meal",
+      "water": "Water",
+      "sleep": "Sleep",
+      "other": "Other"
+    },
+    "subtype": "Type",
+    "when": "Time",
+    "now": "Now ({{time}})",
+    "custom": "Specific time",
+    "sleepNow": "Sleeping now ({{time}})",
+    "sleepRange": "Sleep period",
+    "sleepStart": "Fell asleep",
+    "sleepEnd": "Woke up",
+    "sleepOngoing": "sleeping",
+    "insulinUnits": "Dose (units)",
+    "waterMl": "Amount (ml)",
+    "errors": {
+      "insulinRequired": "Enter the insulin dose (units).",
+      "waterRequired": "Enter the water amount (ml).",
+      "sleepRange": "Wake-up must be after falling asleep and within 24 hours.",
+      "invalidNumber": "Check the number fields."
+    }
+  }
+}

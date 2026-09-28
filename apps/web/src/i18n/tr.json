@@ -1,0 +1,592 @@
+{
+  "app": {
+    "name": "Glukoz Paneli"
+  },
+  "common": {
+    "loading": "Yükleniyor…",
+    "save": "Kaydet",
+    "saved": "Kaydedildi",
+    "cancel": "Vazgeç",
+    "close": "Kapat",
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "all": "Tümü",
+    "yes": "Evet",
+    "no": "Hayır",
+    "later": "Sonra"
+  },
+  "disclaimer": {
+    "title": "Önemli:",
+    "medical": "Bu panel tedavi kararları için kullanılmamalıdır. Veriler gecikmeli veya eksik olabilir. Alarmlar için resmi uygulamayı kullanın."
+  },
+  "footer": {
+    "lastFetch": "Son veri çekme: {{time}}",
+    "unaffiliated": "Resmî olmayan, bağımsız bir açık kaynak projedir; Abbott ile bağlantısı yoktur.",
+    "source": "Kaynak kodu (AGPL-3.0)"
+  },
+  "nav": {
+    "main": "Ana menü",
+    "skip": "İçeriğe geç",
+    "more": "Diğer",
+    "live": "Canlı",
+    "daily": "Günlük",
+    "reports": "Raporlar",
+    "records": "Kayıtlar",
+    "sensors": "Sensörler",
+    "alerts": "Uyarılar",
+    "settings": "Ayarlar"
+  },
+  "auth": {
+    "loginTitle": "Giriş yap",
+    "setupTitle": "İlk kurulum",
+    "setupIntro": "Henüz kullanıcı yok. Paneli yönetecek ilk yönetici (ADMIN) hesabını oluşturun. Bu sayfa kurulumdan sonra kapanır.",
+    "email": "E-posta",
+    "password": "Şifre",
+    "passwordHint": "En az 10 karakter.",
+    "displayName": "Görünen ad",
+    "login": "Giriş yap",
+    "logout": "Çıkış yap",
+    "createAdmin": "Yönetici hesabını oluştur"
+  },
+  "consent": {
+    "title": "KVKK aydınlatma metni ve açık rıza",
+    "p1": "Bu panel, takip edilen kişilerin glukoz ölçümlerini (sağlık verisi — 6698 sayılı KVKK kapsamında özel nitelikli kişisel veri) işler.",
+    "p2": "Veriler yalnızca bu panelin yetkili kullanıcılarına gösterilir, şifreli saklanır ve belirlenen saklama süresi sonunda silinir. Verilerin dışa aktarılmasını veya silinmesini yöneticiden talep edebilirsiniz.",
+    "p3": "Ayrıntılı aydınlatma metni yönetici tarafından sağlanır. Devam ederek bu metni okuduğunuzu ve verilerin bu amaçla işlenmesine açık rıza verdiğinizi onaylarsınız.",
+    "version": "Metin sürümü: {{version}}",
+    "accept": "Aydınlatma metnini okudum; sağlık verilerinin bu panelde işlenmesine açık rıza veriyorum.",
+    "continue": "Onayla ve devam et"
+  },
+  "errors": {
+    "UNKNOWN": "Beklenmeyen bir hata oluştu.",
+    "UNAUTHORIZED": "Oturumunuz sona ermiş ya da giriş bilgileri hatalı.",
+    "FORBIDDEN": "Bu işlem için yetkiniz yok.",
+    "CONSENT_REQUIRED": "Devam etmek için KVKK onayı gerekiyor.",
+    "CSRF": "Güvenlik doğrulaması başarısız.",
+    "NOT_FOUND": "Kayıt bulunamadı.",
+    "VALIDATION": "Girilen bilgiler geçersiz.",
+    "CONFLICT": "Bu işlem mevcut bir kayıtla çakışıyor.",
+    "RATE_LIMITED": "Çok fazla deneme yapıldı.",
+    "HTTP_500": "Sunucu hatası.",
+    "HTTP_502": "Sunucuya ulaşılamadı.",
+    "LLU_BAD_CREDENTIALS": "LibreLinkUp e-posta veya şifresi hatalı.",
+    "LLU_ACTION_REQUIRED": "LibreLinkUp hesabında bekleyen bir onay var (kullanım koşulları vb.).",
+    "LLU_VERSION_TOO_OLD": "LibreLinkUp istemci sürümü artık kabul edilmiyor.",
+    "LLU_RATE_LIMITED": "LibreLinkUp çok fazla istek nedeniyle geçici olarak engelledi.",
+    "LLU_NETWORK": "LibreLinkUp sunucusuna ulaşılamadı.",
+    "LLU_UNAUTHORIZED": "LibreLinkUp oturumu geçersiz.",
+    "LLU_NO_CONNECTIONS": "Bu hesapta takip edilen kişi yok.",
+    "LLU_BAD_RESPONSE": "LibreLinkUp beklenmeyen bir yanıt döndü.",
+    "hint": {
+      "default": "Tekrar deneyin; sorun sürerse yöneticinize başvurun.",
+      "UNAUTHORIZED": "E-posta ve şifrenizi kontrol edip yeniden giriş yapın.",
+      "FORBIDDEN": "Erişim için yöneticinize başvurun.",
+      "CSRF": "Sayfayı yenileyip tekrar deneyin.",
+      "VALIDATION": "Alanları kontrol edip düzeltin.",
+      "RATE_LIMITED": "Bir dakika bekleyip tekrar deneyin.",
+      "LLU_BAD_CREDENTIALS": "Bilgileri LibreLinkUp mobil uygulamasında doğrulayın.",
+      "LLU_ACTION_REQUIRED": "LibreLinkUp mobil uygulamasına girip bekleyen onayı verin.",
+      "LLU_VERSION_TOO_OLD": "Sistem otomatik güncellemeyi dener; sürmezse LLU_VERSION ayarını yükseltin.",
+      "LLU_RATE_LIMITED": "Bir süre bekleyin; sistem otomatik olarak geri çekilir.",
+      "LLU_NO_CONNECTIONS": "Hastanın kendi hesabı yerine ayrı bir takipçi (LibreLinkUp) hesabı kullanın ve daveti kabul edin.",
+      "CONSENT_REQUIRED": "KVKK metnini onaylayın."
+    }
+  },
+  "patient": {
+    "select": "Hasta",
+    "none": "Erişebildiğiniz bir hasta yok. Yöneticinizden erişim isteyin veya LibreLinkUp hesabı ekleyin."
+  },
+  "ranges": {
+    "veryLow": "Çok düşük",
+    "low": "Düşük",
+    "inRange": "Hedefte",
+    "high": "Yüksek",
+    "veryHigh": "Çok yüksek",
+    "veryLowRange": "< 54 mg/dL",
+    "lowRange": "54–69 mg/dL",
+    "inRangeRange": "70–180 mg/dL",
+    "highRange": "181–250 mg/dL",
+    "veryHighRange": "> 250 mg/dL",
+    "inRangeShort": "Hedefte kalma (TIR)",
+    "tightRange": "Sıkı hedefte kalma (TITR)",
+    "tightRangeRange": "70–140 mg/dL",
+    "inTarget": "Kişisel hedef ({{low}}–{{high}})"
+  },
+  "trend": {
+    "NOT_COMPUTABLE": "Hesaplanamadı",
+    "SINGLE_DOWN": "Hızlı düşüyor",
+    "FORTY_FIVE_DOWN": "Düşüyor",
+    "FLAT": "Sabit",
+    "FORTY_FIVE_UP": "Yükseliyor",
+    "SINGLE_UP": "Hızlı yükseliyor",
+    "interval": "Veri sıklığı: yaklaşık {{value}} dakikada bir (LibreLinkUp'ın güncelleme hızı; panel dakikada bir kontrol eder).",
+    "intervalUnknown": "Veri sıklığı henüz hesaplanamadı.",
+    "showProjection": "Öngörüyü göster",
+    "projectionTitle": "Matematiksel öngörü (doğrusal)",
+    "projectionAt": "{{minutes}} dk sonra ≈ {{value}} {{unit}} (olası aralık {{lo}}–{{hi}})",
+    "projectionBasis": "Son {{minutes}} dakikadaki {{count}} ölçümün eğimi: {{rate}} {{unit}}/dk",
+    "projectionUnavailable": "Öngörü için yeterli yakın veri yok (son 20 dakikada en az 3 ölçüm ve 10 dakikadan taze bir değer gerekir).",
+    "selectionTitle": "İki nokta arası eğilim",
+    "selectHint": "Grafikte iki ölçüme dokunarak aradaki değişimi ve yönelimi görün.",
+    "selectSecond": "İkinci noktayı seçin.",
+    "clear": "Seçimi temizle",
+    "segment": "Değişim: {{delta}} {{unit}} / {{minutes}} dk → ortalama {{rate}} {{unit}}/dk",
+    "extension": "Bu eğilim sürerse {{minutes}} dk sonra ≈ {{value}} {{unit}}",
+    "disclaimer": "Öngörü ve eğilim yalnızca geçmiş değerlerin matematiksel (doğrusal) uzatmasıdır; öğün, insülin, egzersiz ve sensör gecikmesini hesaba katmaz. Tedavi kararı için kullanmayın.",
+    "projectionSeries": "Öngörü",
+    "selectionSeries": "Seçilen noktalar",
+    "extensionSeries": "Eğilim uzatması"
+  },
+  "units": {
+    "minutes_one": "{{count}} dk",
+    "minutes_other": "{{count}} dk",
+    "hours_one": "{{count}} sa",
+    "hours_other": "{{count}} sa",
+    "hoursMinutes": "{{h}} sa {{m}} dk",
+    "perDay": "{{value}}/gün"
+  },
+  "live": {
+    "noReading": "Henüz ölçüm yok.",
+    "delta": "{{value}} {{unit}} / 5 dk",
+    "updated": "Son güncelleme: {{ago}}",
+    "stale": "Veri gecikiyor — son ölçüm 15 dakikadan eski. Hastanın telefonunu ve LibreLink uygulamasını kontrol edin.",
+    "polling": "Anlık bağlantı yok; veriler dakikada bir yenileniyor.",
+    "chart": "Glukoz grafiği",
+    "range": "Zaman aralığı",
+    "hours_one": "{{count}} sa",
+    "hours_other": "{{count}} sa",
+    "today": "Bugün",
+    "hypoCount": "Hipo sayısı",
+    "min": "En düşük",
+    "max": "En yüksek"
+  },
+  "sensor": {
+    "title": "Sensör",
+    "serial": "Seri no",
+    "started": "Başlangıç",
+    "expectedEnd": "Beklenen bitiş",
+    "ended": "Bitiş",
+    "remaining": "{{days}} gün {{hours}} saat kaldı",
+    "remainingHours": "{{hours}} saat {{minutes}} dakika kaldı",
+    "remainingLabel": "Sensörün kalan süresi",
+    "expired": "Sensör süresi doldu",
+    "none": "Sensör kaydı yok.",
+    "usedDays": "Kullanım (gün)",
+    "status": "Durum",
+    "active": "Aktif",
+    "endedEarly": "Erken bitti",
+    "completed": "Tamamlandı"
+  },
+  "charts": {
+    "glucose": "Glukoz",
+    "notes": "Notlar",
+    "noData": "Veri yok",
+    "lineSummary": "{{count}} ölçüm; en düşük {{min}}, en yüksek {{max}} {{unit}}.",
+    "agpSummary": "Medyan en düşük {{lowTime}} civarında ({{low}} {{unit}}), en yüksek {{highTime}} civarında ({{high}} {{unit}})."
+  },
+  "noteTypes": {
+    "meal": "Öğün",
+    "insulin_rapid": "Hızlı insülin",
+    "insulin_basal": "Bazal insülin",
+    "exercise": "Egzersiz",
+    "medication": "İlaç",
+    "illness": "Hastalık",
+    "sleep": "Uyku",
+    "other": "Diğer",
+    "water": "Su"
+  },
+  "notes": {
+    "add": "Not ekle",
+    "edit": "Notu düzenle",
+    "type": "Tür",
+    "time": "Zaman",
+    "carbs": "Karbonhidrat (g)",
+    "insulin": "İnsülin (ünite)",
+    "duration": "Süre (dk)",
+    "text": "Açıklama",
+    "empty": "Bu gün için not yok.",
+    "confirmDelete": "Bu not silinsin mi?"
+  },
+  "daily": {
+    "prev": "Önceki gün",
+    "next": "Sonraki gün",
+    "date": "Tarih",
+    "compareWith": "Başka bir günle karşılaştır",
+    "compareLegend": "Kesikli çizgi: {{date}}",
+    "chart": "Gün grafiği",
+    "summary": "Günlük özet",
+    "events": "Olaylar",
+    "notes": "Notlar",
+    "gmiIndicative": "Tek gün için gösterge amaçlı"
+  },
+  "events": {
+    "kinds": {
+      "hypo_l1": "Hipo (seviye 1, <70)",
+      "hypo_l2": "Hipo (seviye 2, <54)",
+      "hyper": "Hiper (>250)"
+    },
+    "total": "Toplam olay",
+    "nocturnalCount_one": "{{count}} gece hiposu",
+    "nocturnalCount_other": "{{count}} gece hiposu",
+    "prolongedCount_one": "{{count}} uzamış",
+    "prolongedCount_other": "{{count}} uzamış",
+    "avgHypo": "Ort. hipo süresi",
+    "avgHyper": "Ort. hiper süresi",
+    "filter": "Olay türü",
+    "nightOnly": "Yalnız gece (00–06)",
+    "none": "Bu dönemde olay yok.",
+    "type": "Tür",
+    "start": "Başlangıç",
+    "duration": "Süre",
+    "extreme": "En uç değer",
+    "night": "Gece",
+    "prolonged": "uzamış",
+    "ongoing": "sürüyor"
+  },
+  "reports": {
+    "period": "Dönem",
+    "days_one": "{{count}} gün",
+    "days_other": "{{count}} gün",
+    "customFrom": "Başlangıç",
+    "customTo": "Bitiş",
+    "apply": "Özel aralık",
+    "exportCsv": "CSV indir",
+    "exportPdf": "PDF indir",
+    "insufficient": "Bu dönemde veri yetersiz (%{{value}}); metrikler yanıltıcı olabilir.",
+    "mean": "Ortalama glukoz",
+    "gmi": "GMI (tahmini A1c)",
+    "gmiMmol": "{{value}} mmol/mol",
+    "cv": "Değişkenlik (CV)",
+    "cvGoal": "Hedef ≤ %36",
+    "sufficiency": "Veri yeterliliği",
+    "sufficiencyShort": "Veri",
+    "sensorDays": "Sensör kullanım günü",
+    "goalMet": "Hedef karşılandı",
+    "goalMissed": "Hedef karşılanmadı",
+    "goalLt": "< {{v}}",
+    "goalGt": "> {{v}}",
+    "goalBelowTotal": "düşük toplamı < {{v}}",
+    "goalAboveTotal": "yüksek toplamı < {{v}}",
+    "periodsOfDay": "Günün dilimleri",
+    "weekdays": "Haftanın günleri",
+    "hypoCount_one": "{{count}} hipo",
+    "hypoCount_other": "{{count}} hipo",
+    "lbgi": "LBGI (düşük risk indeksi)",
+    "hbgi": "HBGI (yüksek risk indeksi)",
+    "lbgiHint": "< 1,1 düşük risk",
+    "hbgiHint": "< 4,5 düşük risk",
+    "sd": "Standart sapma (SD)",
+    "median": "Medyan",
+    "iqr": "Çeyrekler arası aralık (IQR)",
+    "sections": {
+      "summary": "1. Özet",
+      "tir": "2. Aralıkta kalma süreleri",
+      "agp": "3. Ambulatuvar glukoz profili (AGP)",
+      "daily": "4. Günlük profiller",
+      "events": "5. Olaylar",
+      "periods": "6. Günün dilimleri ve haftanın günleri",
+      "heatmap": "7. Saat × gün ısı haritası",
+      "meals": "8. Öğün sonrası analiz",
+      "advanced": "9. Gelişmiş metrikler"
+    },
+    "agp": {
+      "title": "AGP grafiği",
+      "median": "Medyan",
+      "legend": "Kalın çizgi: medyan (%50). Koyu bant: %25–75. Açık bant: %5–95. Yeşil bant: hedef aralık."
+    },
+    "heatmap": {
+      "title": "Saat × gün ısı haritası",
+      "mode": "Hücre değeri",
+      "mean": "Ortalama",
+      "outOfRange": "Aralık dışı süre",
+      "summary": "{{days}} gün × 24 saat ısı haritası."
+    },
+    "gri": {
+      "title": "Glisemi Risk İndeksi (GRI)",
+      "hypo": "Hipo bileşeni",
+      "hyper": "Hiper bileşeni",
+      "zone": "Bölge {{zone}}",
+      "zones": "Kesikli çizgiler bölge sınırlarıdır: A (0–20), B (20–40), C (40–60), D (60–80), E (80–100). Düşük GRI daha iyidir.",
+      "summary": "GRI {{gri}}, bölge {{zone}}."
+    }
+  },
+  "compare": {
+    "better": "iyileşme",
+    "worse": "kötüleşme",
+    "same": "değişmedi",
+    "neutral": "değişim",
+    "points": "puan",
+    "note": "Karşılaştırma önceki eşit uzunluktaki dönemle yapılır. ▲ iyileşme, ▼ kötüleşme."
+  },
+  "periods": {
+    "night": "Gece (00–06)",
+    "morning": "Sabah (06–12)",
+    "afternoon": "Öğleden sonra (12–18)",
+    "evening": "Akşam (18–24)"
+  },
+  "weekdays": {
+    "monday": "Pzt",
+    "tuesday": "Sal",
+    "wednesday": "Çar",
+    "thursday": "Per",
+    "friday": "Cum",
+    "saturday": "Cmt",
+    "sunday": "Paz"
+  },
+  "meals": {
+    "intro": "Öğün notlarına göre ortalama yanıt ({{unit}}). Öğün türü saatten tahmin edilir.",
+    "kind": "Öğün",
+    "count": "Sayı",
+    "pre": "Öncesi",
+    "at1h": "1. saat",
+    "at2h": "2. saat",
+    "peak": "Zirve",
+    "toPeak": "Zirveye süre",
+    "details_one": "{{count}} öğünün ayrıntısı",
+    "details_other": "{{count}} öğünün ayrıntısı",
+    "kinds": {
+      "breakfast": "Kahvaltı",
+      "lunch": "Öğle",
+      "dinner": "Akşam",
+      "snack": "Ara öğün"
+    }
+  },
+  "print": {
+    "title": "Glukoz raporu",
+    "period": "Dönem",
+    "generated": "Oluşturulma: {{time}}",
+    "print": "Yazdır / PDF"
+  },
+  "records": {
+    "filter": "Filtre",
+    "notes": "Notlar",
+    "scan": "Tarama",
+    "alarm": "Alarm",
+    "empty": "Bu dönemde kayıt yok."
+  },
+  "alerts": {
+    "active": "Etkin uyarılar",
+    "ack": "Onayla",
+    "acked": "{{time}} onaylandı",
+    "history": "Uyarı geçmişi",
+    "none": "Uyarı yok.",
+    "rules": "Uyarı kuralları",
+    "threshold": "Eşik (mg/dL)",
+    "sustain": "Süre (dk)",
+    "cooldown": "Tekrar bekleme (dk)",
+    "quietStart": "Sessiz başlangıç",
+    "quietEnd": "Sessiz bitiş",
+    "urgentIgnoresQuiet": "Acil düşük uyarısı sessiz saatlerden etkilenmez."
+  },
+  "alertKinds": {
+    "urgent_low": "Acil düşük",
+    "urgent_lowDesc": "Değer eşiğin (varsayılan 54) altına indiğinde hemen.",
+    "low": "Düşük",
+    "lowDesc": "Değer eşiğin (varsayılan 70) altında belirtilen süre kalırsa.",
+    "high": "Yüksek",
+    "highDesc": "Değer eşiğin (varsayılan 250) üstünde belirtilen süre kalırsa.",
+    "rapid_fall": "Hızlı düşüş",
+    "rapid_fallDesc": "Trend hızlı düşüş ve değer eşiğin (varsayılan 120) altındaysa.",
+    "rapid_rise": "Hızlı yükseliş",
+    "rapid_riseDesc": "Trend hızlı yükseliş gösterdiğinde.",
+    "stale": "Veri kesintisi",
+    "staleDesc": "Belirtilen süre (varsayılan 20 dk) yeni veri gelmezse.",
+    "sensor_ending": "Sensör bitiyor",
+    "sensor_endingDesc": "Sensörün bitmesine 24 saatten az kaldığında, günde bir kez."
+  },
+  "push": {
+    "title": "Bildirimler",
+    "enable": "Bildirimleri aç",
+    "disable": "Bildirimleri kapat",
+    "enabled": "Bildirimler açıldı.",
+    "disabled": "Bildirimler kapatıldı.",
+    "test": "Test bildirimi gönder",
+    "testSent_one": "{{count}} cihaza gönderildi.",
+    "testSent_other": "{{count}} cihaza gönderildi.",
+    "state": {
+      "unsupported": "Bu tarayıcı Web Push desteklemiyor.",
+      "denied": "Bildirim izni reddedilmiş. Tarayıcı ayarlarından izin verin.",
+      "subscribed": "Bu cihaz bildirim alıyor.",
+      "unsubscribed": "Bu cihaz bildirim almıyor."
+    },
+    "iosNote": "iPhone/iPad'de bildirimler yalnızca uygulama ana ekrana eklendiğinde çalışır (iOS 16.4+): Safari'de Paylaş → Ana Ekrana Ekle, sonra uygulamayı ana ekrandan açın.",
+    "delayNote": "Bildirimler buluta ve internet bağlantısına bağlıdır, gecikebilir; resmi uygulamanın alarmlarının yerine geçmez."
+  },
+  "pwa": {
+    "updateAvailable": "Güncelleme var —",
+    "reload": "Yenile"
+  },
+  "offline": {
+    "withTime": "Çevrimdışı — son veriler {{time}} itibarıyla",
+    "noData": "Çevrimdışı — kayıtlı veri yok"
+  },
+  "settings": {
+    "preferences": "Tercihler",
+    "unit": "Birim",
+    "language": "Dil",
+    "theme": "Tema",
+    "themes": {
+      "system": "Sistem",
+      "light": "Açık",
+      "dark": "Koyu"
+    },
+    "patient": "Hasta ayarları — {{name}}",
+    "displayName": "Takma ad",
+    "timezone": "Saat dilimi",
+    "targetLow": "Hedef alt sınır (mg/dL)",
+    "targetHigh": "Hedef üst sınır (mg/dL)",
+    "presets": "Hazır hedef profilleri",
+    "presetNames": {
+      "general": "Genel (70–180)",
+      "pregnancy": "Hamilelik (63–140)",
+      "olderHighRisk": "Yaşlı / yüksek risk (70–180)"
+    },
+    "lluTargets": "LibreLink'teki hedef: {{low}}–{{high}} mg/dL",
+    "sensorLife": "Sensör ömrü (gün)",
+    "sensorLifeHint": "Libre 2 Plus: 15, Libre 2: 14",
+    "install": "Uygulamayı yükle",
+    "installButton": "Ana ekrana yükle",
+    "iosInstall": "iPhone/iPad: Safari'de Paylaş → Ana Ekrana Ekle.",
+    "installUnavailable": "Tarayıcınız yükleme önerisi sunmuyor; tarayıcı menüsünden \"Uygulamayı yükle\" seçeneğini kullanın.",
+    "account": "Hesap"
+  },
+  "roles": {
+    "ADMIN": "Yönetici",
+    "CAREGIVER": "Bakıcı",
+    "VIEWER": "Salt okunur / doktor"
+  },
+  "admin": {
+    "title": "Yönetim",
+    "users": "Kullanıcılar ve erişimler",
+    "addUser": "Kullanıcı ekle",
+    "role": "Rol",
+    "newPassword": "Yeni şifre (boş: değişmez)",
+    "access": "Hasta erişimi",
+    "canEdit": "Düzenleyebilir",
+    "confirmDeleteUser": "{{name}} silinsin mi?"
+  },
+  "llu": {
+    "title": "LibreLinkUp hesapları",
+    "add": "Hesap ekle",
+    "addAndTest": "Ekle ve bağlantıyı test et",
+    "testing": "Test ediliyor…",
+    "followerNote": "Hastanın kendi LibreLink hesabını değil, ayrı bir LibreLinkUp takipçi hesabı kullanın (hasta uygulamadan davet eder, takipçi LibreLinkUp uygulamasında kabul eder).",
+    "label": "Etiket",
+    "email": "LibreLinkUp e-posta",
+    "password": "LibreLinkUp şifre",
+    "added_one": "Eklendi; {{count}} hasta bulundu: {{names}}",
+    "added_other": "Eklendi; {{count}} hasta bulundu: {{names}}",
+    "none": "Henüz hesap yok.",
+    "region": "Bölge",
+    "patients_one": "{{count}} hasta",
+    "patients_other": "{{count}} hasta",
+    "test": "Bağlantıyı test et",
+    "testOk_one": "Bağlantı başarılı; {{count}} hasta.",
+    "testOk_other": "Bağlantı başarılı; {{count}} hasta.",
+    "resume": "Devam ettir",
+    "confirmDelete": "Hesap ve tüm hasta verisi silinecek. Onaylamak için etiketi yazın: {{label}}",
+    "status": {
+      "active": "Etkin",
+      "paused": "Duraklatıldı",
+      "error": "Hata"
+    }
+  },
+  "system": {
+    "title": "Sistem durumu",
+    "mock": "mock mod",
+    "minVersion": "Sunucu en az {{v}} sürümünü istiyor",
+    "status": "Durum",
+    "lastSuccess": "Son başarılı çekim",
+    "successRate": "24 sa başarı",
+    "lastError": "Son hata",
+    "troubleshooting": "Sorun giderme",
+    "symptom": "Belirti / kod",
+    "cause": "Olası neden",
+    "fix": "Çözüm"
+  },
+  "trouble": {
+    "v920": {
+      "symptom": "HTTP 403, status 920, minimumVersion",
+      "cause": "LLU_VERSION eski",
+      "fix": "Sürümü minimumVersion değerine yükseltin (otomatik deneme de yapılır)"
+    },
+    "header": {
+      "symptom": "HTTP 400 RequiredHeaderMissing",
+      "cause": "Account-Id başlığı yok",
+      "fix": "İstemcinin sha256(user.id) başlığını gönderdiğini kontrol edin"
+    },
+    "s2": {
+      "symptom": "status 2",
+      "cause": "Yanlış e-posta/şifre",
+      "fix": "Bilgileri LibreLinkUp mobil uygulamasında doğrulayın"
+    },
+    "s4": {
+      "symptom": "status 4 / step",
+      "cause": "Bekleyen kullanım koşulları/gizlilik onayı",
+      "fix": "LibreLinkUp mobil uygulamasına girip onaylayın"
+    },
+    "empty": {
+      "symptom": "Bağlantı listesi boş",
+      "cause": "Hastanın kendi hesabı girilmiş ya da davet kabul edilmemiş",
+      "fix": "Ayrı takipçi hesabı kullanın, daveti kabul edin"
+    },
+    "r429": {
+      "symptom": "HTTP 429 / kilitlenme",
+      "cause": "Çok sık istek veya çok fazla hatalı giriş",
+      "fix": "Geri çekilmeyi bekleyin; polling aralığını artırın"
+    },
+    "delay": {
+      "symptom": "Veri 15+ dk gecikiyor",
+      "cause": "Hastanın telefonu çevrimdışı, LibreLink kapalı/pil optimizasyonu, Bluetooth kopması",
+      "fix": "Hastanın telefonunu kontrol edin; LibreLink için pil optimizasyonunu kapatın"
+    },
+    "gaps": {
+      "symptom": "Sensör değerleri boşluklu",
+      "cause": "Telefon–sensör mesafesi, Bluetooth kesintisi",
+      "fix": "12 saate kadar otomatik doldurulur; daha uzunsa CSV içe aktarın"
+    }
+  },
+  "import": {
+    "title": "LibreView CSV içe aktarma — {{name}}",
+    "intro": "LibreView web sitesinden indirdiğiniz glukoz CSV dosyasını yükleyin (en fazla 20 MB). Mevcut ölçümler korunur.",
+    "file": "CSV dosyası",
+    "upload": "Yükle",
+    "result": "{{imported}} ölçüm eklendi, {{skipped}} atlandı ({{rows}} satır)."
+  },
+  "deleteData": {
+    "title": "Veri silme (KVKK) — {{name}}",
+    "intro": "Bu hastanın tüm ölçümleri, notları, sensör ve uyarı kayıtları kalıcı olarak silinir. Geri alınamaz; önce CSV ile dışa aktarmanız önerilir.",
+    "start": "Silme işlemini başlat",
+    "typeName": "Onaylamak için hasta adını yazın: \"{{name}}\" ({{sec}} sn içinde)",
+    "confirm": "Kalıcı olarak sil",
+    "done": "Veriler silindi."
+  },
+  "entry": {
+    "quickTitle": "Hızlı giriş",
+    "quickHint": "Şimdi olanı tek dokunuşla ya da geçmiş bir zamanı seçerek kaydedin. Girişler grafikte işaret olarak görünür.",
+    "categories": {
+      "insulin": "İnsülin",
+      "meal": "Yemek",
+      "water": "Su",
+      "sleep": "Uyku",
+      "other": "Diğer"
+    },
+    "subtype": "Tür",
+    "when": "Zaman",
+    "now": "Şimdi ({{time}})",
+    "custom": "Belirli zaman",
+    "sleepNow": "Şimdi uyuyor ({{time}})",
+    "sleepRange": "Uyku aralığı",
+    "sleepStart": "Uyku başlangıcı",
+    "sleepEnd": "Uyanış",
+    "sleepOngoing": "uyku sürüyor",
+    "insulinUnits": "Doz (ünite)",
+    "waterMl": "Miktar (ml)",
+    "errors": {
+      "insulinRequired": "İnsülin dozunu (ünite) girin.",
+      "waterRequired": "Su miktarını (ml) girin.",
+      "sleepRange": "Uyanış, uyku başlangıcından sonra ve en fazla 24 saat içinde olmalı.",
+      "invalidNumber": "Sayı alanlarını kontrol edin."
+    }
+  }
+}

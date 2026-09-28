@@ -1,0 +1,10 @@
+node_modules
+dist
+coverage
+pnpm-lock.yaml
+SPEC.md
+apps/api/prisma/migrations
+playwright-report
+test-results
+LICENSE
+CODE_OF_CONDUCT.md

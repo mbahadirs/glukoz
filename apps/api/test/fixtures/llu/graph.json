@@ -1,0 +1,49 @@
+{
+  "status": 0,
+  "data": {
+    "connection": {
+      "patientId": "11111111-2222-4333-8444-555555555555",
+      "firstName": "Test",
+      "lastName": "Hasta"
+    },
+    "activeSensors": [
+      { "sensor": { "sn": "0M0000TEST1", "a": 1790000000, "pt": 4 }, "device": { "did": "x" } }
+    ],
+    "graphData": [
+      {
+        "FactoryTimestamp": "9/27/2026 12:53:50 PM",
+        "Timestamp": "9/27/2026 3:53:50 PM",
+        "type": 0,
+        "ValueInMgPerDl": 101,
+        "MeasurementColor": 1,
+        "GlucoseUnits": 1,
+        "Value": 101,
+        "isHigh": false,
+        "isLow": false
+      },
+      {
+        "FactoryTimestamp": "9/27/2026 1:08:50 PM",
+        "Timestamp": "9/27/2026 4:08:50 PM",
+        "type": 0,
+        "ValueInMgPerDl": 97,
+        "MeasurementColor": 1,
+        "GlucoseUnits": 1,
+        "Value": 97,
+        "isHigh": false,
+        "isLow": false
+      },
+      {
+        "FactoryTimestamp": "9/27/2026 1:23:50 PM",
+        "Timestamp": "9/27/2026 4:23:50 PM",
+        "type": 0,
+        "ValueInMgPerDl": 93,
+        "MeasurementColor": 1,
+        "GlucoseUnits": 1,
+        "Value": 93,
+        "isHigh": false,
+        "isLow": false
+      },
+      { "FactoryTimestamp": "not a date", "ValueInMgPerDl": 93 }
+    ]
+  }
+}

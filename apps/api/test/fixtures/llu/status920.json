@@ -1,0 +1,5 @@
+{
+  "status": 920,
+  "data": { "minimumVersion": "4.17.0" },
+  "error": { "message": "The minimum version is not supported" }
+}
